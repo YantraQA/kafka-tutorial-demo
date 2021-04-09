@@ -1,0 +1,33 @@
+version: '3.2'
+services:
+  kafka_dummy_producer_1:
+    image: yantraqa/kafka_dummy_producer_1:latest
+    hostname: kafka-producer-client
+    ports:
+      - "8002:8002"
+#    volumes:
+#      - ./data/kafka1/data:/var/lib/kafka/data
+    depends_on:
+      - zookeeper
+
+
+  kafka_dummy_consumer_1:
+    image: yantraqa/kafka_dummy_consumer_1:latest
+    hostname: kafka_dummy_consumer_1
+    ports:
+      - "8002:8002"
+#    volumes:
+#      - ./data/kafka1/data:/var/lib/kafka/data
+    depends_on:
+      - zookeeper
+
+  kafka_producer_client_notification_api:
+    image: yantraqa/kafka_producer_client_notification_api:latest
+    hostname: kafka_producer_client_notification_api
+    ports:
+      - "9091:9091"
+    volumes:
+      - ./data/kafka1/data:/var/lib/kafka/data
+    depends_on:
+      - zookeeper
+
